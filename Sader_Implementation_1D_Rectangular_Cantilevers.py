@@ -72,7 +72,6 @@ def Sader_Scaling_Parameters(Re_Scaling = 1 ,T_Scaling = 5, L = 10e-3, b = 1e-3,
     H = 3/2*f_v[0] * np.pi*(Fac1[:,:,None] * dPhi_dx[:,np.newaxis]**2).sum(axis=0)
     dW = H*2*kb*T/f_v[0]
     fp_indexes = scipy.signal.find_peaks(np.array(H[:,-1]))[0]
-#    fp_indexes = peak.indexes(np.array(H[:,-1]),thres=1e-3, min_dist=2)
     f_p = f[fp_indexes]
     W = (Fac1[:,:,None] * Phi[:,np.newaxis]**2).sum(axis=0)
     W_fp = W[fp_indexes,:]
@@ -92,6 +91,7 @@ def Sader_Scaling_Parameters(Re_Scaling = 1 ,T_Scaling = 5, L = 10e-3, b = 1e-3,
         plt.xlim([0.01, f_plot[-1]])
         plt.ylabel('H')
         plt.xlabel('$\omega/\omega_{vac}$')
+        plt.tight_layout()
         plt.show()
         
     if Plots_Inside:
@@ -102,6 +102,7 @@ def Sader_Scaling_Parameters(Re_Scaling = 1 ,T_Scaling = 5, L = 10e-3, b = 1e-3,
            plt.xlim([0, L])
            if jj < 2:
                 plt.xticks([])
+       plt.tight_layout()
        plt.show()
     return W, dW, f_p, f_v, f_R, Q, f, X, fp_indexes
 
@@ -195,6 +196,7 @@ def Sader_Material_Parameters(rho_c = 2328 , eta = 8.9e-4 , L = 10e-3, b = 1e-3,
         plt.xlim([0.01, f_plot[-1]])
         plt.ylabel('H')
         plt.xlabel('$\omega/\omega_{vac}$')
+        plt.tight_layout()
         plt.show()
         
     if Plots_Inside:
@@ -205,6 +207,7 @@ def Sader_Material_Parameters(rho_c = 2328 , eta = 8.9e-4 , L = 10e-3, b = 1e-3,
            plt.xlim([0, L])
            if jj < 2:
                 plt.xticks([])
+       plt.tight_layout()
        plt.show()
     return W, dW, f_p, f_v, f_R, Q, f, X, fp_indexes, Re_Scaling, T_Scaling,
 
@@ -246,6 +249,7 @@ def Find_N_roots(Nn=20,Plots_Inside=False, Save = False):
         plt.xlim([0, C[-1]])
         if Save:
             name.savefig('PDF/PDF_Roots.pdf', bbox_inches='tight')
+        plt.tight_layout()
         plt.show()
     return C
 
